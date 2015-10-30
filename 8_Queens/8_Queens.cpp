@@ -6,6 +6,7 @@ using namespace std;
 
 const int w_ = 8;
 const int h_ = 8;
+int solutionCount = 0;
 
 bool isValid(int r, int c);
 bool canPlace(int board[][w_], int r, int c, int &smallDim);
@@ -27,9 +28,9 @@ int main()
 		exit(1);
 	}
 
-	cout << "Press enter to begin";
+	cout << "Press enter to begin\n";
 	cin.ignore();
-	cout << "Generating Boards and writing to \"8queens.txt\"";
+	cout << "Generating Boards and writing to \"8queens.txt\"\n";
 
 	for (int r = 0; r < h_; r++)
 		for (int c = 0; c < w_; c++)
@@ -44,6 +45,9 @@ int main()
 	placeQueens(board, 0, 0, smallDim, 0, fileOut);
 
 	fileOut.close();
+
+	cout << "Finished generating boads: " << solutionCount << " solutions found\n\nPress enter to exit";
+	cin.ignore();
 	return 0;
 }
 
@@ -78,7 +82,8 @@ void placeQueens(int board[][w_], int r, int c, int& smallDim, int queenCount, o
 
 	if (queenCount >= 8)
 	{
-		cout << "Board found\n";
+		solutionCount++;
+		fileOut << "NUMBER OF QUEENS: " << queenCount << "\n";
 		printBoardLarge(board, fileOut);
 		fileOut << "\n\n\n\n";
 	}
